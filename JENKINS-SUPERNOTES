@@ -1,0 +1,188 @@
+What is Jenkins?
+            CI tool
+            Continous integ tool.
+            Free and Open Source BUT
+            Version
+                    Jenkins -  Free and Open Source
+                    Enterprise Jenkins by Cloudbees - Paid
+            Dev in JAVA
+                    PLATFORM INM
+                    JRE
+            Powered with PLUGINS
+                    POWERED BY COMMUNITY 
+            Earlier called - HUDSON
+
+What is Continous integ?
+    Allow Failure -> Repeat Auto.
+
+Auto Build  + Auto Testing 
+-------------------------------
+    Auto Imm Feedback
+
+PLAN -> CODE -> REVIEW -> BUILD -> UT -> PACK -> Dep2Archive -> Dep2QA -> AT -> CC ->
+                                                                    PASS ===============RELEASE
+                                                                    FAIL --------------- REPTEAT
+==============================================================================================
+                            IMM Feedback        
+                                        EMAIL
+                                        WHATSAPP
+                                        CHAT - SLACK - 
+                                        DASHABOARDING     
+
+
+PLAN -> CODE -> REVIEW -> BUILD -> UT -> PACK -> Dep2Archive -> Dep2QA -> AT -> CC ->
+========================================================================================= 
+JIRA -> GIT -> SONAR -> MAVEN -> JUNIT -> JAR -> NEXUS -> CHEF -> SEL -> JACOCO
+[========================================================================================]   
+                                            JENKINS 
+                                                    Imm feedback
+                                                                EMAIL
+                                                                CHAT
+                                                                SMS
+                                                                Dashboarding
+                                                    Schedule
+                                                            5 WAYS
+
+                                                    Distribute a Work Load
+
+Other tools - 
+Teamcity -> Bamboo -> CIRCLE -> UBUILD
+https://www.devopsschool.com/top10tools/
+https://www.devopsschool.com/blog/top-10-continuous-integration-tool/
+https://www.devopsschool.com/blog/top-5-cloud-based-continuous-integration-tools/
+
+
+Architecture of Jenkins
+====================================
+MASTER 
+        For Humen
+                Config Projects
+                Config Plugins.
+        WEB BASED INTERFACE
+        8080
+        WAR FILE
+
+
+SLAVE - NODE - Remote Machine 
+        Build Server 
+        One defaut Build Server --- Call it "MASTER"
+        Doing a real work - 
+        jAR FILE    
+            which enable run in backg to recieved a work from mastera do it same node.
+        ANY 
+        WINDOWS - LINUX - 
+https://www.devopsschool.com/blog/jenkins-architecture-explained/
+
+How to install and configure jenkins?
+====================================
+https://www.devopsschool.com/tutorial/jenkins/jenkins-installation-and-configuration.html
+
+35.154.114.196:8080
+ec2-user
+Key - 
+Pre 
+    JDK -
+    Jenkins
+
+
+http://35.154.114.196:8080/
+devops
+debvops123
+==================================================
+How to start working with Jenkins?
+
+Jenkins formula
+=========================
+    What is your technology?
+                    JAVA - DOTNET - PY - GO - (BUILD SERVER)    
+                    Version
+    Where is your source code?
+                    tool
+                    address
+                    access
+                    branch
+                    ### git tool should be there in build Server
+    What is your builder?
+                    JAVA - MAVEN - gradle 
+                    DOT  - msbuild
+
+    How often you want to trigger this job?
+                    hourly.
+
+    Whom you want to notify a feedback?
+                    email - rajesh@scmgalaxy.com
+
+
+=========================
+    What is your technology?
+                    JAVA 8
+    Where is your source code?
+                    git - https://github.com/devops-school/helloworld-java-maven
+    What is your builder?
+                    maven
+    How often you want to trigger this job?
+                    hourly.
+    Whom you want to notify a feedback?
+                    email - rajesh@scmgalaxy.com
+
+
+    
+
+How to org Jobs?
+    VIEW    Represents - Projects
+        FOLDER
+                Group of JOBS
+
+How to copy job?
+
+How to display Junit report?
+
+how to archive?
+==========================================
+
+How to do auto cleanup?
+
+Lets do Continous integration?
+===============================================
+PLAN -> CODE -> REVIEW -> BUILD -> UT -> PACK -> Dep2Archive -> Dep2QA -> AT -> CC ->
+========================================================================================= 
+JIRA -> GIT -> SONAR -> MAVEN -> JUNIT -> JAR -> NEXUS -> CHEF -> SEL -> JACOCO
+[========================================================================================
+
+Rules of Integration with Jenkins
+=================================================
+# PRE - YOUR TOOL must be running with Access details.
+
+Step 1 - INSTALL Tools PLUGINS
+http://35.154.114.196:8080/pluginManager/
+
+Step 2 - Configure Jenkins with a tools details.
+http://35.154.114.196:8080/configure
+
+Step 3 - USE in the JOBS.
+        FoR JIRA        
+        1. I SHOULD KNOW WHICH COMMIT is made for which JIRA TICKET
+        2. Job failed - Created a Ticket and assign a to one.
+
+Step 4 - Verify
+
+Lets deep dive into Trigers and Scheduling?
+Lets deep dive into Feedback?
+
+
+ALL
+JIRA
+http://13.126.45.67:8080/
+devops
+devops123
+Sonarqube Integration with jenkins
+==========================================
+Sonarqube Server
+http://13.126.45.67:9000
+
+Jenkins
+1. Sonarqube Plugins
+2. Scanner tool
+3. Config Sonarqube
+4. Use it,
+    https://github.com/devops-school/java-sonar-runner-simple
