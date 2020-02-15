@@ -45,6 +45,8 @@ JIRA -> GIT -> SONAR -> MAVEN -> JUNIT -> JAR -> NEXUS -> CHEF -> SEL -> JACOCO
 
                                                     Distribute a Work Load
 
+                                                        Security
+
 Other tools - 
 Teamcity -> Bamboo -> CIRCLE -> UBUILD
 https://www.devopsschool.com/top10tools/
@@ -217,3 +219,223 @@ How to Schedule and Trigger a job automatically in Jenkins?
 
 http://35.154.114.196:8080/view/RK/job/QATeam/
 https://github.com/devops-school/helloworld-java-maven
+========================================================================================
+
+How to enable Jenkins for Providing Imm Feedback?
+        EMAIL   
+        CHAT
+        DASHBOARD
+EMAIL
+--------------------------
+Step 1 -        Install these plugins - Mailer Plugin	   -  Email Extension Plugin
+                        
+Step 2  COnfig email plugins with SMTP
+                E-mail Notification
+                Extended E-mail Notification
+
+        System Admin e-mail address
+Step 3 USE IT
+
+CHAT
+=======================
+        jabbar
+        SLACK
+        team
+        skype
+Step 1- Install plugins
+Step 2 - configure plugins 
+Step 3 - use it
+
+DASHBOARD
+=========================================
+        Build Pipeline - Lazy - Existing JOBS
+        1. Need Existing Jobs
+        2. Linked Each Jobs
+
+        Pipeline - Write a code in Jenkinsfile - Not required Existing job
+
+pipeline {
+   agent any
+
+   tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "rajesh"
+   }
+
+   stages {
+      stage('Build') {
+         steps {
+            // Get some code from a GitHub repository
+            git 'https://github.com/devops-school/helloworld-java-maven'
+
+            // Run Maven on a Unix agent.
+            sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+
+         post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+            success {
+               archiveArtifacts 'target/*.jar'
+            }
+         }
+      }
+	  stage('UT') {
+         steps {
+            // Get some code from a GitHub repository
+            git 'https://github.com/devops-school/helloworld-java-maven'
+
+            // Run Maven on a Unix agent.
+            sh "mvn -Dmaven.test.failure.ignore=true clean test"
+
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+
+         post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+            success {
+               junit '**/target/surefire-reports/TEST-*.xml'
+            }
+			
+	emailext (
+				subject: "Job '${env.JOB_NAME} ${env.BUILD_NUMBER}'",
+				body: """<p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}</a></p>""",
+				to: "rajesh@scmgalaxy.com",
+			from: "mailer@scmgalaxy.com"
+)
+         }
+      }
+   }
+}
+==========================================================================
+
+USE OF JENKINS NODE EXECUTORS...
+
+CUNCURRNET FEATURE  AKA "Execute concurrent builds if necessary"
+
+        /var/lib/jenkins/workspace/RK EXEC
+        /var/lib/jenkins/workspace/RK EXEC@3
+
+
+How to add a nodes?
+===================================================
+LINUX
+        Step 1 Get a Node Build server info
+                        IP - uSER - Key - Work dir.
+                        13.126.45.67
+                        ec2-user
+
+        Step 2 - Install JDK
+
+        Step 3 -  Add a node
+
+        Step 4 - USE IT.
+
+WINDOWS
+
+
+all
+
+
+linux-family
+
+windows-family
+
+
+========================================================================
+Security
+========================================================================
+How to login into jenkins? - AUTHENTICATION
+        Delegate to servlet container	Help for feature: Delegate to servlet container
+        [DEFAULT]Jenkins’ own user database	Help for feature: Jenkins’ own user database
+        LDAP	Help for feature: LDAP
+        Unix user/group database
+
+What I am suppose to do? - AUTHRIZATION
+        Anyone can do anything	Help for feature: Anyone can do anything
+        Legacy mode	Help for feature: Legacy mode
+        Logged-in users can do anything	Help for feature: Logged-in users can do anything
+
+        Matrix-based security	Help for feature: Matrix-based security
+        Project-based Matrix Authorization Strategy
+
+Trigger a job using command line
+========
+CURL usign REST API
+        devops
+        devops123
+        1128147329ac1498fa126708106ed7fc09
+
+curl -X POST --user devops:1128147329ac1498fa126708106ed7fc09 http://35.154.181.91:8080/job/devjobs/job/siva4/build
+
+wget --auth-no-challenge --user=devops --password=devops123 http://35.154.181.91:8080/job/devjobs/job/siva4/build
+
+http://35.154.181.91:8080/job/devjobs/job/siva4/
+
+jenkins-cmd-line utility.
+http://35.154.181.91:8080/user/devops/
+
+java -jar jenkins-cli.jar -s http://35.154.181.91:8080/ help
+
+
+java -jar jenkins-cli.jar -s http://35.154.181.91:8080/  -auth devops:1128147329ac1498fa126708106ed7fc09 help
+java -jar jenkins-cli.jar -s http://35.154.181.91:8080/  -auth devops:1128147329ac1498fa126708106ed7fc09 delete-job GBR_test
+
+Nexus with Jenkins
+================================
+http://13.126.45.67:8081/nexus/
+admin
+admin123
+
+http://13.126.45.67:8081/nexus/content/repositories/myall/
+http://13.126.45.67:8081/nexus/content/repositories/myall/
+http://13.126.45.67:8081/nexus/repository/myall
+
+com.scmgalaxy.mavensample
+yoodle
+
+405, ReasonPhrase:HTTP method PUT is not supported by this URL
+versioning of job
+
+Clean up of jenkins jobs
+============================
+
+Parametrized option..
+
+
+Git revert using jenkins
+
+
+backup and recovery
+https://www.devopsschool.com/blog/jenkins-backup-and-restore-process/
+
+Tutorials
+https://www.devopsschool.com/tutorial/jenkins/
+
+blog
+https://www.devopsschool.com/blog/?s=jenkins
+
+slides
+https://www.devopsschool.com/slides/jenkins/
+
+PDF
+PENDING
+
+
+Notes - GITHUB
+
+Sample  Programs - GITHUNB
+https://www.devopsschool.com/videos/show/jenkins?type=video
+
+Videos
+https://www.youtube.com/channel/UCrXr49kBvXJeQMMl2693c4g/videos
+
+QA
+https://www.devopsschool.com/lms
+
+http://rajeshkumar.xyz/
