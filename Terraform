@@ -1,3 +1,7 @@
+Machine Details :
+https://epsh2.signin.aws.amazon.com/console
+Broadridge_user03 / Br@12345
+
 To update all the url for package_manager:
 [root@ip-172-31-86-204 ~]# amazon-linux-extras install epel -y
 
