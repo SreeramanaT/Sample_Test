@@ -3,3 +3,20 @@ To update all the url for package_manager:
 
 To install git :
 [root@ip-172-31-86-204 ~]# yum install -y git tree vim
+
+download Terraform :
+[root@ip-172-31-86-204 ~]# wget https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip
+
+unzip terraform :
+[root@ip-172-31-86-204 ~]# unzip terraform_0.12.23_linux_amd64.zip
+
+move terraform to usr/bin folder : 
+[root@ip-172-31-86-204 ~]# mv ./terraform /usr/bin
+
+get the path where your terraform folder has to be in either of them :
+[root@ip-172-31-86-204 ~]# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+
+which terraform for unix /Where terraform for windows : 
+[root@ip-172-31-86-204 ~]# which terraform
+/usr/bin/terraform
