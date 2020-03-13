@@ -149,3 +149,84 @@ Initializing terraform
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ubuntu              latest              72300a873c2c        2 weeks ago         64.2MB
 hello-world         latest              fce289e99eb9        14 months ago       1.84kB
+
+
+[root@ip-172-31-86-204 lab2]# docker ps
+CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS              PORTS               NAMES
+95bef9e4cb0f        72300a873c2c        "tail -f /dev/null"   About an hour ago   Up About an hour                        ubuntu-container-srt
+[root@ip-172-31-86-204 lab2]# docker rm -f 95bef9e4cb0f
+
+[root@ip-172-31-86-204 lab2]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@ip-172-31-86-204 lab2]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              72300a873c2c        2 weeks ago         64.2MB
+hello-world         latest              fce289e99eb9        14 months ago       1.84kB
+[root@ip-172-31-86-204 lab2]# docker image rm IMAGE 72300a873c2c
+Untagged: ubuntu:latest
+
+
+updated terraform file
+---------------------
+provider "docker" {
+
+}
+
+resource "docker_image" "ubuntu-srt-ltst" {
+  name = "ubuntu:latest"
+}
+
+resource "docker_container" "ubuntu-container-srt-container1" {
+  name = "ubuntu-container-srt-ltst"
+  image = docker_image.ubuntu-srt-ltst.latest
+  command = ["tail", "-f", "/dev/null"]
+  must_run = "true"
+}
+
+resource "docker_image" "ubuntu-srt" {
+  name = "ubuntu:16.04"
+}
+
+resource "docker_container" "ubuntu-container-srt-container2" {
+  name = "ubuntu-container-srt"
+  #  We are retrieving image name using interpolation here 
+  #        resource_type.resource_name
+  image = docker_image.ubuntu-srt.name
+  command = ["tail", "-f", "/dev/null"]
+  must_run = "true"
+}
+
+resource "docker_image" "centos_img" {
+  name = "centos:6.7"
+}
+
+resource "docker_container" "centos-container-srt" {
+  name = "centos-container-srt"
+  image = docker_image.centos_img.name
+  command = ["tail", "-f", "/dev/null"]
+  must_run = "true"
+}
+
+
+
+
+Initializing terraform
+-----------------------
+[root@ip-172-31-86-204 lab1]# terraform init
+[root@ip-172-31-86-204 lab1]# terraform validate
+[root@ip-172-31-86-204 lab1]# terraform apply
+
+[root@ip-172-31-86-204 lab2]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               77be327e4b63        2 weeks ago         124MB
+ubuntu              latest              72300a873c2c        2 weeks ago         64.2MB
+centos              6.7                 9f1de3c6ad53        12 months ago       191MB
+hello-world         latest              fce289e99eb9        14 months ago       1.84kB
+
+[root@ip-172-31-86-204 lab2]# docker ps
+CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS              PORTS               NAMES
+2edce88e8951        centos:6.7          "tail -f /dev/null"   20 seconds ago      Up 19 seconds                           centos-container-srt
+d97e3cc2742f        ubuntu:16.04        "tail -f /dev/null"   23 seconds ago      Up 21 seconds                           ubuntu-container-srt
+0a25c5b20fe3        72300a873c2c        "tail -f /dev/null"   28 seconds ago      Up 27 seconds                           ubuntu-container-srt-ltst
+
+
