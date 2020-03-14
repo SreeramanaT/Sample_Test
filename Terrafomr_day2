@@ -95,13 +95,28 @@ resource "aws_subnet" "srt_private_subnet_1" {
 #END
 #----
 
+** to look at the Plan for multiple tf files use the below command
+[root@ip-172-31-42-202 vpc-lab]# terraform plan
+
 ** To destroy what was created earlier use the command as below
 [root@ip-172-31-42-202 vpc-lab]# terraform destroy
 
 [root@ip-172-31-42-202 vpc-lab]# ls
 create-aws-vpc-and-subnets.tf  terraform.tfstate  terraform.tfstate.backup
 
-** untill we have the tfstate new resources will not be created. if we delete teh tfstate file and apply the terraform new resources will be created again
+** untill we have the tfstate new resources will not be created. 
+   if we delete the tfstate file and apply the terraform new resources will be created again
 
 
+[root@ip-172-31-42-202 ec2-instance-lab]# ssh-keygen -f <private_key>
+exe : ssh-keygen -f tektutor-key
+and follow the instructions to allow and generate the public key as <tektutor-key.pub>
 
+[root@ip-172-31-42-202 ec2-instance-lab]# cat tektutor-key.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC79KuXTdd0slZec6OMW6RWCRaLYu7khyRO9PIFhEzp6+exubXmXOgvYSVbPi1jjSuuRxM2q8HnoFN6n3Tdu6q3KICBsSRxwqu9lQVgJeB7kXih51hNeOSkgmv5KV90Xp/K0daX+U7zEstjafPe4PVvVMCrtiMutXUWSQauTce4eztm2rSPuaMy3vGgdEy6rTVGCqGGo8ez6qZy7+f88qPzpiiywNgq45dB1yZzdZgO5ozusm+AGx2sUCFezt3ueGILizuKttw2T8O2Oh4LyfOPnHoG4eAgIV0uQkl8OdEFdUTuozLAIg3inaWu6rKMhocoAMNHV6iP8j4jcDBY9oD root@ip-172-31-42-202.ec2.internal
+[root@ip-172-31-42-202 ec2-instance-lab]#
+
+copy the above public key and use in  create-public-private-key-pair.tf
+
+
+ssh -i tektutor-key -1 ec2-user <ip>
