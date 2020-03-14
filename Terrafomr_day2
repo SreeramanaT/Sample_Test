@@ -1,0 +1,29 @@
+    1  amazon-linux-extras install epel -y
+    2  yum install -y git tree vim
+    3  wget https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip
+    4  unzip terraform_0.12.23_linux_amd64.zip
+    5  ls
+    6  mv ./terraform /usr/bin
+    7  ls
+    8  which terraform
+    9  terraform --version
+   10  cls
+   11  terraform init
+   12  sudo yum install -y python3
+   13  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   14  ls
+   15  unzip awscliv2.zip
+   16  ls
+   17  sudo ./aws/install
+   --setting the path temporarily
+   18  export PATH=$PATH:/usr/local/aws-cli/v2/2.0.3/bin
+   19  echo $PATH
+   20  which aws
+   21  aws --version
+   
+   -- to add permanently to the path do below steps
+   22  vim /root/.bashrc
+   and add at the end of that file
+   export PATH=$PATH:/usr/local/aws-cli/v2/2.0.3/bin
+
+
