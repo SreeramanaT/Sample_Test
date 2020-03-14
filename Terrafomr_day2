@@ -15,6 +15,7 @@
    15  unzip awscliv2.zip
    16  ls
    17  sudo ./aws/install
+   
    --setting the path temporarily
    18  export PATH=$PATH:/usr/local/aws-cli/v2/2.0.3/bin
    19  echo $PATH
@@ -25,5 +26,27 @@
    22  vim /root/.bashrc
    and add at the end of that file
    export PATH=$PATH:/usr/local/aws-cli/v2/2.0.3/bin
+   
+   24  git clone https://github.com/tektutor/terraform-hyd-march-2020.git
+
+   26  cd terraform-hyd-march-2020/
+
+   29  cd Day2
+
+   31  cd vpc-lab/
+
+   33  terraform init
+
+   34  aws configure
+[root@ip-172-31-42-202 vpc-lab]# aws configure
+AWS Access Key ID [****************GI7N]: AKIA2RLIAWXT6HKKGI7N
+AWS Secret Access Key [None]: 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
+Default region name [rjgU8FHNys5Tx0GFsZCFyJnJ+ZV+fpyndbI01DEo]: us-east-1
+Default output format [None]: None
+[root@ip-172-31-42-202 vpc-lab]#
+
+
+
+
 
 
