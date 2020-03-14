@@ -120,3 +120,7 @@ copy the above public key and use in  create-public-private-key-pair.tf
 
 
 ssh -i tektutor-key -1 ec2-user <ip>
+
+
+*** Documentation - https://www.terraform.io/docs/providers/  *****
+
