@@ -46,7 +46,62 @@ Default output format [None]: None
 [root@ip-172-31-42-202 vpc-lab]#
 
 
+[root@ip-172-31-42-202 vpc-lab]# vim create-aws-vpc-and-subnets.tf
+---------------------
+#START
+#-----
+# This helps terraform download the necessary aws provider plugin to interact with your aws account
+provider "aws" {
+        region = "us-east-1"
+}
 
+# Create your own AWS Virtual Private Networking using VPC
+#resource "aws_vpc" "VPC2" {
+#       cidr_block = "162.178.0.0/16"
+#       instance_tenancy = "default"
+#       enable_dns_support = "true"
+#       enable_dns_hostnames = "true"
+#
+#       tags = {
+#           Name =  "VPC2"
+#       }
+#}
+
+# Create your public subnet here
+resource "aws_subnet" "srt_public_subnet_1" {
+     #  vpc_id = aws_vpc.VPC2.id
+        vpc_id = "vpc-02565ffafb9b917d3"
+        cidr_block = "162.178.3.0/24"
+        map_public_ip_on_launch = "true"
+        availability_zone = "us-east-1a"
+
+        tags = {
+                Name = "srt_public_subnet_1"
+        }
+}
+
+# Create your private subnet here
+resource "aws_subnet" "srt_private_subnet_1" {
+     #  vpc_id = aws_vpc.VPC2.id
+        vpc_id = "vpc-02565ffafb9b917d3"
+        cidr_block  = "162.178.24.0/24"
+        map_public_ip_on_launch = "false"
+
+        tags = {
+                Name = "srt_private_subnet_1"
+        }
+}
+
+#END
+#----
+
+** To destroy what was created earlier use the command as below
+[root@ip-172-31-42-202 vpc-lab]# terraform destroy
+
+[root@ip-172-31-42-202 vpc-lab]# ls
+create-aws-vpc-and-subnets.tf  terraform.tfstate  terraform.tfstate.backup
+
+** untill we have the tfstate new resources will not be created. if we delete teh tfstate file and apply the terraform new resources will be created again
 
 
 
